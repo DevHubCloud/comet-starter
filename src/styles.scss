@@ -1,13 +1,470 @@
 @forward 'providers/uswds/uswds.scss';
+@use 'uswds';
 
-.usa-section {
-  padding-top: 1em;
+//TESTING
+body {
+  background-color: red;
 }
 
-#mainSection {
-  min-height: 500px;
+//——— ADIG BASE —————————
+a {
+  color: uswds.$theme-color-primary;
+}
+p {
+  line-height: 1.5em;
+}
+h2 {
+  font-size: 2em;
+}
+h3 {
+  font-size: 1.38em;
 }
 
-.loading-text {
-  color: #005ea2;
+p.agid-small {
+  font-size: 0.88em;
+}
+p.agid-smallest {
+  font-size: 5px;
+}
+
+.usa-intro {
+  @extend .font-family-sans;
+  font-weight: 300;
+}
+
+// .agid-text-group {
+//   h4,
+//   h6 {
+//     margin-block-end: 1em;
+//     margin-block-start: 1em;
+//   }
+//   p,
+//   a {
+//     margin-block-start: 0;
+//   }
+// }
+//
+// .agid-text-group {
+//   .agid-text-group-label {
+//     // margin-block-end: 0;
+//   }
+//   .agid-text-group-title {
+//     margin-block-start: 0.5em;
+//   }
+//   .agid-text-group-text {
+//     margin-block-start: 0.5em;
+//     margin-block-end: 0em;
+//   }
+// }
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1em;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1em;
+}
+
+//—— BUTTON OVERRIDES —————————
+
+button.agid-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+
+  &.outline {
+    border: 1px solid #ffffff;
+  }
+}
+
+button.agid-button[disabled] {
+  svg {
+    fill: uswds.$theme-color-base-dark;
+
+    path {
+      fill: uswds.$theme-color-base-dark;
+    }
+  }
+}
+
+//—— ICON OVERRIDES —————————
+
+.usa-date-picker__button {
+  background-image: url('/img/site-ui/calendar_today-primary.svg'),
+    linear-gradient(transparent, transparent);
+}
+
+//——  —————————
+
+.agid-sort {
+  @extend .flex-row;
+  gap: 0;
+
+  a {
+    @extend .text-base;
+  }
+
+  path {
+    fill: uswds.$theme-color-base-dark;
+  }
+}
+
+.agid-shadow-right {
+  box-shadow: 1px 0 4px rgb(0 0 0 / 0.2);
+}
+
+.adig-full-width {
+  display: flex;
+  width: -webkit-fill-available;
+  width: stretch;
+}
+
+.agid-primary-bg {
+  background-color: uswds.$theme-color-primary;
+}
+.agid-primary-dark-bg {
+  background-color: uswds.$theme-color-primary-dark;
+}
+.agid-primary-darker-bg {
+  background-color: uswds.$theme-color-primary-darker;
+}
+
+.agid-primary-bg,
+.agid-primary-dark-bg,
+.agid-primary-darker-bg {
+  @extend .adig-full-width;
+  * {
+    color: #ffffff;
+  }
+  a {
+    color: #ffffff;
+
+    &:hover {
+      color: uswds.$theme-color-primary-light;
+    }
+  }
+
+  ul.usa-collection {
+    margin-block-start: 0;
+  }
+
+  .usa-collection__calendar-date-day {
+    border-color: #ffffff;
+    color: #000000;
+  }
+
+  .usa-collection__item {
+    color: #ffffff;
+  }
+
+  .usa-collection__calendar-date-month {
+    background-color: #ffffff;
+    color: uswds.$theme-color-primary;
+  }
+}
+
+.agid-subtext {
+  // font-size: uswds.$theme-type-scale-lg;
+  font-size: 1em;
+}
+
+//——— DATA PAGE —————————
+
+.agid-data-page {
+  display: flex;
+  width: -webkit-fill-available;
+  width: stretch;
+}
+
+//——— HEADER OVERRIDES —————————
+
+.agid-help-contact {
+  @extend .agid-primary-bg;
+  justify-content: flex-end;
+
+  a {
+    padding: 1.5em;
+  }
+}
+
+.usa-header--extended {
+  .usa-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5em;
+
+    .agid-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6em;
+      width: -webkit-fill-available;
+      width: stretch;
+    }
+
+    .usa-logo {
+      max-width: -webkit-fill-available;
+      max-width: stretch;
+
+      #logo-link {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1em;
+
+        .usa-logo-img {
+          width: 4em;
+
+          svg {
+            width: 4em;
+            height: 4em;
+          }
+        }
+
+        .adig-header__logo-pre-heading {
+          font-size: 0.5em;
+          margin-block-start: 0.5em;
+          margin-block-end: 0.5em;
+
+          @media all and (max-width: 29.99em) {
+            font-size: 1em;
+          }
+        }
+      }
+    }
+
+    section,
+    .usa-search {
+      display: flex;
+      align-items: flex-end;
+      max-width: calc(47ch + 3rem);
+    }
+
+    .usa-nav__link {
+      .usa-icon,
+      .usa-icon--size-3 {
+        // USWDS - This converts from USWDS to ADIG
+        width: 1rem !important;
+        height: 1rem !important;
+      }
+    }
+  }
+}
+
+.usa-nav__primary .usa-nav__primary-item {
+  font-size: 1em;
+
+  a {
+    margin-right: 1.25em;
+  }
+}
+
+.agid-desktop-search {
+  display: flex;
+
+  button {
+    display: inline-block;
+  }
+}
+
+.agid-mobile-search {
+  display: none;
+
+  button {
+    display: none;
+  }
+}
+
+#auth-link {
+  display: none;
+}
+
+.usa-footer__return-to-top {
+  padding: 2rem 0 0;
+
+  .agid-return-to-top {
+    width: fit-content;
+    padding: 2rem 2rem 1rem;
+    background-image: url('/img/site-ui/return-to-top.svg');
+  }
+
+  a {
+    color: white;
+  }
+}
+
+table.data-table tr,
+table.data-table th,
+table.data-table tr th {
+  background-color: uswds.$theme-color-base-lighter;
+  border-bottom: 1px solid uswds.$theme-color-base;
+}
+
+table.data-table {
+  th,
+  td {
+    border-left: 1px solid uswds.$theme-color-base-light;
+    border-right: 1px solid uswds.$theme-color-base-light;
+  }
+}
+
+// ————— BANNER 6040
+
+.banner-6040 {
+  display: flex;
+  align-items: flex-start;
+  gap: 2em;
+  padding: 0;
+
+  width: -webkit-fill-available;
+  width: stretch;
+  height: 100%;
+
+  h1 {
+    font-size: 2.5em;
+    margin: 0 0 0.5em;
+  }
+  h3 {
+    margin-top: 0;
+  }
+  h4 {
+    margin-bottom: 0;
+  }
+  p {
+    margin-top: 0.5em;
+  }
+
+  .content-left {
+    width: 60%;
+    padding: 4em 3em;
+    padding-left: 0;
+    height: 100%;
+
+    .banner-content-split {
+      width: -webkit-fill-available;
+      width: stretch;
+      display: flex;
+      justify-content: space-between;
+      gap: 1em;
+
+      div:first-child,
+      div:last-child {
+        width: 50%;
+      }
+    }
+  }
+
+  .content-right {
+    width: 40%;
+    padding: 4em 3em;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+}
+
+.usa-footer {
+  .usa-footer__return-to-top {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .usa-footer__primary-section {
+    border-top: uswds.$theme-border-radius-sm solid
+      uswds.$theme-color-base-light;
+  }
+}
+
+.usa-footer__logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.agid-footer-heading {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+
+  .adig-footer__logo-pre-heading {
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+  }
+
+  .usa-footer__logo-img {
+    width: 7em;
+    max-width: 7em;
+    height: 7em;
+
+    svg {
+      width: 7em;
+      height: 7em;
+    }
+  }
+}
+
+@media all and (max-width: 64em) {
+  h1 {
+    font-size: 1.37em;
+  }
+  h3 {
+    font-size: 1em;
+  }
+
+  .agid-help-contact {
+    display: none;
+  }
+
+  .usa-header--extended {
+    .usa-navbar {
+      #logo-link {
+        justify-content: flex-start;
+        gap: 2em;
+      }
+    }
+  }
+
+  .agid-desktop-search {
+    display: none;
+
+    button {
+      display: none;
+    }
+  }
+
+  .agid-mobile-search {
+    display: flex;
+
+    button {
+      display: inline-block;
+    }
+  }
+}
+
+@media all and (min-width: 30em) {
+  .usa-button {
+    width: fit-content;
+  }
+}
+
+@media all and (max-width: 29.99em) {
+  .usa-header--extended
+    .usa-navbar
+    .usa-logo
+    #logo-link
+    .adig-header__logo-pre-heading {
+    font-size: 1em !important;
+  }
+
+  .agid-app-title {
+    display: none;
+  }
 }

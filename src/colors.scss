@@ -1,0 +1,15 @@
+@forward './providers/uswds/uswds.scss';
+@use 'uswds';
+
+//———— AGID COLORS ————
+
+$theme-color-base-lightest-est: #fafafa;
+$theme-color-accent-lighter: #e1f3f8;
+
+$theme-color-accent-cool-darker: #07648d;
+$theme-color-accent-cool-light: #97d4ea;
+
+$theme-color-base-lightest-more: lighten(uswds.$theme-color-base-lightest, 50%);
+
+$theme-color-content-bg: #f9f9f9;
+$theme-color-content-bgsad: #f9f9f5;
