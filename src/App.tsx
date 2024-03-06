@@ -9,7 +9,23 @@ import Details from './pages/details/details';
 import { Home } from './pages/home/home';
 import { SignIn } from './pages/sign-in/sign-in';
 
+// Base global configuration for the query client
 const queryClient = new QueryClient();
+
+// Enhanced global configuration for the query client
+// const queryClient = new QueryClient({
+//   defaultOptions: {
+//     queries: {
+//       retry: 3, // Retry 3 times
+//       retryDelay: 1000, // Retry after 1 second
+//       staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+//       refetchOnWindowFocus: false, // Do not refetch on window focus
+//     },
+//     mutations: {
+//       retry: false,
+//     },
+//   },
+// });
 
 export const App = (): React.ReactElement => (
   <QueryClientProvider client={queryClient}>
