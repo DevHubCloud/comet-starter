@@ -1,5 +1,5 @@
 import { DataTable } from '@metrostar/comet-extras';
-import { Button, ButtonGroup } from '@metrostar/comet-uswds';
+import { Button, ButtonGroup, Select } from '@metrostar/comet-uswds';
 import { Spacecraft } from '@src/types/spacecraft';
 import { ColumnDef } from '@tanstack/react-table';
 import React, { useEffect, useState } from 'react';
@@ -14,6 +14,7 @@ export const DashboardTable = ({
   items,
 }: DashboardTableProps): React.ReactElement => {
   const [data, setData] = useState<TableData[]>();
+  const [pageSize, setPageSize] = useState(5);
   const cols = React.useMemo<ColumnDef<TableData>[]>(
     () => [
       {
@@ -59,6 +60,14 @@ export const DashboardTable = ({
     }
   }, [items]);
 
+  useEffect(() => {
+    console.log('Page size: ', pageSize);
+    if (items) {
+      const newData = [...items];
+      setData([...newData]);
+    }
+  }, [items, pageSize]);
+
   const handleAdd = () => {
     if (data) {
       const newData = [...data];
@@ -92,6 +101,23 @@ export const DashboardTable = ({
           Delete Row
         </Button>
       </ButtonGroup>
+      <Select
+        id="select-1"
+        name="select-1"
+        onChange={(e) => {
+          setPageSize(Number(e.target.value));
+        }}
+        options={[
+          {
+            label: '5',
+            value: '5',
+          },
+          {
+            label: '10',
+            value: '10',
+          },
+        ]}
+      ></Select>
       <DataTable
         id="launch-table"
         className="width-full"
@@ -101,7 +127,7 @@ export const DashboardTable = ({
         sortCol="appearances"
         sortDir="desc"
         pageable
-        pageSize={20}
+        pageSize={pageSize}
       ></DataTable>
     </>
   ) : (
