@@ -1,4 +1,5 @@
 import { DataTable } from '@metrostar/comet-extras';
+import { Button, ButtonGroup } from '@metrostar/comet-uswds';
 import { Spacecraft } from '@src/types/spacecraft';
 import { ColumnDef } from '@tanstack/react-table';
 import React, { useEffect, useState } from 'react';
@@ -58,16 +59,51 @@ export const DashboardTable = ({
     }
   }, [items]);
 
+  const handleAdd = () => {
+    if (data) {
+      const newData = [...data];
+      newData?.push({
+        name: 'New Row',
+        affiliation: 'New Row',
+        dimensions: 'New Row',
+        appearances: 0,
+      });
+      console.log(newData);
+      setData([...newData]);
+    }
+  };
+
+  const handleDelete = () => {
+    if (data) {
+      const newData = [...data];
+      newData?.pop();
+      console.log(newData);
+      setData([...newData]);
+    }
+  };
+
   return data ? (
-    <DataTable
-      id="launch-table"
-      className="width-full"
-      columns={cols}
-      data={data}
-      sortable
-      sortCol="appearances"
-      sortDir="desc"
-    ></DataTable>
+    <>
+      <ButtonGroup>
+        <Button id="add-btn" onClick={handleAdd}>
+          Add Row
+        </Button>
+        <Button id="delete-btn" onClick={handleDelete}>
+          Delete Row
+        </Button>
+      </ButtonGroup>
+      <DataTable
+        id="launch-table"
+        className="width-full"
+        columns={cols}
+        data={data}
+        sortable
+        sortCol="appearances"
+        sortDir="desc"
+        pageable
+        pageSize={20}
+      ></DataTable>
+    </>
   ) : (
     <></>
   );
